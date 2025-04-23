@@ -20,4 +20,22 @@ class UsuarioController extends Controller
     }
 
     // ... método store ...
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:usuarios',
+            'contraseña' => 'required|string|min:8|confirmed',
+            'rol' => 'required|in:admin,cliente',
+        ]);
+
+        Usuario::create([
+            'nombre' => $request->nombre,
+            'email' => $request->email,
+            'contraseña' => Hash::make($request->contraseña),
+            'rol' => $request->rol,
+        ]);
+
+        return redirect()->route('usuarios.index')->with('success', 'Usuario creado exitosamente.');
+    }
 }

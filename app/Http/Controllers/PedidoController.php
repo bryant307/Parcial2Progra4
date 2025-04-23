@@ -19,4 +19,16 @@ class PedidoController extends Controller
     }
 
     // ... método store ...
+    public function store(Request $request)
+    {
+        $request->validate([
+            'id_usuario' => 'required|exists:usuarios,id',
+            'total' => 'required|numeric|min:0',
+            'estado' => 'required|in:pendiente,en_proceso,entregado,cancelado',
+        ]);
+
+        Pedido::create($request->all());
+
+        return redirect()->route('pedidos.index')->with('success', 'Pedido creado exitosamente.');
+    }
 }

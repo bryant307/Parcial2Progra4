@@ -40,7 +40,7 @@
         <a href="{{ route('usuarios.create') }}">Agregar Usuario</a>
 
         <h2>Productos</h2>
-        <a href="{{ route('productos_index') }}">Ver Productos</a>
+        <a href="{{ route('productos.index') }}">Ver Productos</a>
         <a href="{{ route('productos.create') }}">Agregar Producto</a>
 
         <h2>Pedidos</h2>
